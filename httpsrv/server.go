@@ -69,8 +69,8 @@ func (h *handler) waitForReverseConnection(ctx context.Context, name, connid str
 	select {
 	case <-ctx.Done():
 		return nil, fmt.Errorf("wait cancel")
-	case <-time.After(time.Second * 60):
-		return nil, fmt.Errorf("wait timeout")
+	case <-time.After(time.Second * 30):
+		return nil, fmt.Errorf("wait timeout,name:%s,connid:%s", name, connid)
 	case cliConn, ok := <-cliChan:
 		if ok == false {
 			return nil, fmt.Errorf("proxy client wait channel closed")
